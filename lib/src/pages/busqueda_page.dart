@@ -2,8 +2,8 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/models/negocio_model.dart';
-import 'package:iparty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/models/negocio_model.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
 import 'package:provider/provider.dart';
  
  
@@ -67,6 +67,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
 
   List<Widget> _listaResultados(List<NegocioModel> negocios) {
       return negocios.map((negocio){
+        print(negocio.popularidad.toString());
         return Material(
           borderRadius: BorderRadius.circular(25),
           color: Colors.black,
@@ -106,7 +107,7 @@ class _BusquedaPageState extends State<BusquedaPage> {
                       children: <Widget>[
                         Text(negocio.nombre, style: GoogleFonts.roboto(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
                         Text(negocio.ubicacion, style: GoogleFonts.roboto(color: Colors.white, fontSize: 14)),
-                        _estrellas(5),
+                        _estrellas(negocio.popularidad),
                       ],
                     ),
                   ),

@@ -1,11 +1,13 @@
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/components/nogocioCard_horizontal.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/components/nogocioCard_horizontal.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/providers/publitio_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,25 +19,29 @@ class _HomePageState extends State<HomePage> {
 
   final primary = Colors.black;
   final secondary = Color(0xffff5722);
-
+ 
   
 
   @override
-  void initState() { 
+  void initState()  { 
+    
     super.initState();
+    PublitioProvider.configurePublitio();
   }
 
+  
   @override
   void dispose() {
     super.dispose();
   }
+  
   
   @override
   Widget build(BuildContext context) {
 
     final info = Provider.of<UsuarioInfoProvider>(context);
     final negocioProvider = Provider.of<NegocioProvider>(context);
-
+    
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: primary,
@@ -70,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
         actions: <Widget>[
-          IconButton(icon: Icon( EvaIcons.messageCircleOutline, color: Colors.white, size: 28,), onPressed: () => Get.toNamed('chat_page'),)
+          IconButton(icon: Icon( EvaIcons.messageCircleOutline, color: Colors.white, size: 28,), onPressed: () => Get.toNamed('chat_list', arguments: info.usuarioInfo),)
         ],
       ),
       body: Stack(
@@ -288,33 +294,41 @@ Widget _showBares() {
     );
   }
   Widget _barraBusqueda() {
-    return Hero(
-      tag: 'busqueda',
-          child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.width * .05, vertical: Get.height * .01),
-        child: GestureDetector(
-          onTap: () =>{
-            Get.toNamed('busqueda')
-          },
-          child: Container(
-            width: Get.width,
-            height: Get.height * .06,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.white10,
-              border: Border.all(color: Colors.white10, width: 1)
-            ),
-            child: Row(
-              children: <Widget>[
-                SizedBox(width: Get.width * .05,),
-                Icon(EvaIcons.search, color: Colors.white30,),
-                SizedBox(width: Get.width * .04,),
-                Material(type: MaterialType.transparency,child: Text('Buscar', style: GoogleFonts.roboto(fontSize: 20, color: Colors.white30)))
-              ],
+    final info = Provider.of<UsuarioInfoProvider>(context);
+
+    return Row(
+      children: <Widget>[
+        Hero(
+          tag: 'busqueda',
+              child: Padding(
+            padding: EdgeInsets.only(left: Get.width * .05, top: Get.height * .01, bottom:  Get.height * .01 ),
+            child: GestureDetector(
+              onTap: () =>{
+                Get.toNamed('busqueda')
+              },
+              child: Container(
+                width: Get.width*.8,
+                height: Get.height * .06,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.white10,
+                  border: Border.all(color: Colors.white10, width: 1)
+                ),
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(width: Get.width * .05,),
+                    Icon(EvaIcons.search, color: Colors.white30,),
+                    SizedBox(width: Get.width * .04,),
+                    Material(type: MaterialType.transparency,child: Text('Buscar', style: GoogleFonts.roboto(fontSize: 20, color: Colors.white30)))
+                  ],
+                ),
+              ),
             ),
           ),
         ),
-      ),
+          IconButton(highlightColor: Color(0xffff5722), splashColor:  Color(0xffff5722), icon: Icon(FontAwesomeIcons.camera , color: Colors.white38 ), onPressed: ()=>Get.toNamed('subir_historia', arguments: info.usuarioInfo)
+        )
+      ],
     );
   }
 }

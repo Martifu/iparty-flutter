@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:iparty/src/components/image_picker_dialog.dart';
+import 'package:IParty/src/components/image_picker_dialog.dart';
 
 class ImagePickerHandler {
   ImagePickerDialog imagePicker;

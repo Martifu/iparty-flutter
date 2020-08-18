@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:iparty/src/models/usuario_info_model.dart';
-import 'package:iparty/src/utils/environment.dart';
+import 'package:IParty/src/models/usuario_info_model.dart';
+import 'package:IParty/src/utils/environment.dart';
 
 class UsuarioInfoProvider extends ChangeNotifier{
   final box = GetStorage();
@@ -11,6 +11,7 @@ class UsuarioInfoProvider extends ChangeNotifier{
   final _url = Environment.url;
 
   UsuarioInfo usuarioInfo;
+
   
   
   
@@ -18,7 +19,7 @@ class UsuarioInfoProvider extends ChangeNotifier{
 
    getInfo() async {
     print('object');
-      final url = Uri.https(_url, "/api/usuario");
+      final url = Uri.http(_url, "/api/usuario");
 
       
       final authData = {
@@ -26,7 +27,11 @@ class UsuarioInfoProvider extends ChangeNotifier{
       };
 
     final resp = await http.post(url,
-        headers: {'Content-type': 'application/json'}, 
+        headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read('token')}',
+    }, 
       body: json.encode(authData)
     );
 
@@ -36,9 +41,14 @@ class UsuarioInfoProvider extends ChangeNotifier{
 
           this.usuarioInfo = UsuarioInfo.fromJson(decodedResp['data']);
           box.write('foto', decodedResp['data']['foto']);
-       
+          box.write('id', decodedResp['data']['id']);
+          
+
          notifyListeners();
    }
+
+   
+
 
    clearInfo() async {
           this.usuarioInfo = null;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iparty/src/bloc/registro_bloc.dart';
+import 'package:IParty/src/bloc/registro_bloc.dart';
 
 
 class ProviderRegistro extends InheritedWidget {
 
-  final registroBloc      = new RegistroBloc();
+  final registroBloc = new RegistroBloc();
 
 
   static ProviderRegistro _instancia;

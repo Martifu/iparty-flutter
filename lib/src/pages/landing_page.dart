@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iparty/src/components/slider.dart';
+import 'package:IParty/src/components/slider.dart';
 
 class Landing extends StatefulWidget {
   @override

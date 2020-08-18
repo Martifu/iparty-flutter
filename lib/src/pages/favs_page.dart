@@ -1,12 +1,11 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/models/negocio_model.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/models/negocio_model.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
 import 'package:provider/provider.dart';
 
 class FavsPage extends StatefulWidget {
@@ -63,7 +62,7 @@ class _FavsPageState extends State<FavsPage> {
                   decoration: BoxDecoration(
                     image: DecorationImage(image: NetworkImage(info.usuarioInfo.foto), fit: BoxFit.cover),
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2)
+                    border: Border.all(color: Colors.white, width: 2),
                   ),
                 ),
               ),
@@ -79,7 +78,7 @@ class _FavsPageState extends State<FavsPage> {
                 ),
               ),
         actions: <Widget>[
-          IconButton(icon: Icon( EvaIcons.messageCircleOutline, color: Colors.white, size: 28,), onPressed: () => Get.toNamed('chat_page'),)
+          IconButton(icon: Icon( EvaIcons.messageCircleOutline, color: Colors.white, size: 28,), onPressed: () => Get.toNamed('chat_list', arguments: info.usuarioInfo),)
         ],
       ),
       body: Container(

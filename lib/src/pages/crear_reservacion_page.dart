@@ -1,22 +1,31 @@
+import 'package:IParty/src/models/reservacion_model.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/utils/socket_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/models/negocio_model.dart';
+import 'package:IParty/src/models/negocio_model.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:provider/provider.dart';
  
  
 class CrearReservacion extends StatefulWidget {
   @override
   _CrearReservacionState createState() => _CrearReservacionState();
 }
-
+ 
 class _CrearReservacionState extends State<CrearReservacion> {
-  String selectedDate = '' ;
+  DateTime selectedDate = DateTime.now() ;
   int personas;
   String zona;
   String comentarios;
+  final _socketClient = SocketClient(); 
+  ReservacionModel reservacionModel = ReservacionModel();
+
+
 
 
   TextEditingController personasController = new TextEditingController();
@@ -24,9 +33,25 @@ class _CrearReservacionState extends State<CrearReservacion> {
 
   @override
   void initState() {
-    scrollController = ScrollController();
     super.initState();
+    scrollController = ScrollController();
+    connectSocket();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _socketClient.disconnect();
+
+  }
+
+  connectSocket() async {
+    final usuario = Provider.of<UsuarioInfoProvider>(context, listen: false);
+    await _socketClient.connect(usuario.usuarioInfo.id.toString());
+    
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +93,15 @@ class _CrearReservacionState extends State<CrearReservacion> {
   }
 
   _botonGuardar(NegocioModel negocio) {
+    final usuario = Provider.of<UsuarioInfoProvider>(context, listen: false);
+    final negocioProvider = Provider.of<NegocioProvider>(context);
+
     return ButtonTheme(
       minWidth: Get.width * .9,
       height: Get.height * .08,
       child: RaisedButton(
         onPressed: (){
-          if (selectedDate == '' || personasController.text.isEmpty) {
+          if (personasController.text.isEmpty) {
             
             Get.snackbar('Ups!', 'Complete todos los campos',
              snackPosition: SnackPosition.TOP,
@@ -134,12 +162,28 @@ class _CrearReservacionState extends State<CrearReservacion> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                FlatButton(onPressed: (){
+                                FlatButton(onPressed: ()async {
                                   Get.back();
                                 }, child: Text('Editar', style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 22))),
 
-                                FlatButton(onPressed: (){
+                                FlatButton(onPressed: () async {
+                                  reservacionModel.idNegocio = negocio.id;
+                                  reservacionModel.idUsuario = usuario.usuarioInfo.id;
+                                  reservacionModel.personas = personas;
+                                  reservacionModel.zona = comentarios;
+                                  reservacionModel.dia = selectedDate;
+                                  _socketClient.reservacion(reservacionModel, usuario.usuarioInfo.nombre, negocio.id.toString()+negocio.nombre);
                                   Get.back();
+                                  Get.offAllNamed('home');
+                                  await negocioProvider.getReservaciones();
+
+                                  Get.snackbar('Listo!', 'Tu reservación ha sido recibida!',
+                                  snackPosition: SnackPosition.TOP,
+                                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                    borderColor:Colors.red,
+                                    borderWidth: 1,
+                                    backgroundColor: Colors.white
+                                    );
                                 }, child: Text('Enviar', style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 22))),
                               ],
                             ),
@@ -151,7 +195,6 @@ class _CrearReservacionState extends State<CrearReservacion> {
                   ),
                 )
               );
-
           }
         },
         color: Color(0xffff5722),
@@ -206,22 +249,21 @@ class _CrearReservacionState extends State<CrearReservacion> {
                 padding: EdgeInsets.symmetric(vertical: 20, horizontal: Get.width*.2),
                 onPressed: () {
                     DatePicker.showDateTimePicker(context,
-                                          theme: DatePickerTheme(
-                                            doneStyle: TextStyle(color: Colors.red)
-                                          ),
-                                          showTitleActions: true,
-                                          minTime: DateTime.now(), 
-                                          onChanged: (date) {
-                                        print('change $date');
-                                      }, onConfirm: (date) {
-                                        
-                                        setState(() {
-                                          selectedDate = date.toIso8601String(); 
-                                        });
-
-                                      }, currentTime: DateTime.now(), locale: LocaleType.es);
+                      theme: DatePickerTheme(
+                        doneStyle: TextStyle(color: Colors.red)
+                      ),
+                      showTitleActions: true,
+                      minTime: DateTime.now(), 
+                      onChanged: (date) {
+                    print('change $date');
+                  }, onConfirm: (date) {
+                    
+                    setState(() {
+                      selectedDate = date; 
+                    });
+                  }, currentTime: DateTime.now(), locale: LocaleType.es);
                 },
-                child: (selectedDate == '') ? Text(
+                child: (selectedDate == null) ? Text(
                     'Selecciona tu hora de reservación',
                     style: TextStyle(color: Colors.red),
                 ) : Text(

@@ -8,11 +8,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/components/image_picker_handler.dart';
-import 'package:iparty/src/models/usuario_info_model.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/publitio_provider.dart';
-import 'package:iparty/src/providers/usuario_provider.dart';
+import 'package:IParty/src/components/image_picker_handler.dart';
+import 'package:IParty/src/models/negocio_model.dart';
+import 'package:IParty/src/models/usuario_info_model.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/publitio_provider.dart';
+import 'package:IParty/src/providers/usuario_provider.dart';
 import 'package:provider/provider.dart';
 
 class EditarPerfilPage extends StatefulWidget {
@@ -250,8 +251,8 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
           barrierDismissible: false
         );
 
-        final imagen = await PublitioProvider.uploadVideo(_image);
-        usuarioProvider.editarInfo(nombreController.text, imagen);
+        Historia imagen = await PublitioProvider.uploadProfile(_image);
+        usuarioProvider.editarInfo(nombreController.text, imagen.urlFile);
         Provider.of<UsuarioInfoProvider>(context, listen: false).clearInfo();
         Provider.of<UsuarioInfoProvider>(context, listen: false).getInfo();
         setState(() {
@@ -281,6 +282,6 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
   }
 
  
-
+  
  
 }

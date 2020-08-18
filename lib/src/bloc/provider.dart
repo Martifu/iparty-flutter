@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iparty/src/bloc/login_bloc.dart';
+import 'package:IParty/src/bloc/login_bloc.dart';
 
 
 class ProviderLogin extends InheritedWidget {

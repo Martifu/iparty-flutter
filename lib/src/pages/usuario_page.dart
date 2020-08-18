@@ -1,9 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,14 @@ class UsuarioPage extends StatelessWidget {
         actions: <Widget>[
           GestureDetector(
             onTap: (){
+              
               box.erase();
+              negocioProvider.busquedas = [];
+              negocioProvider.antros = [];
+              negocioProvider.todos= [];
+              negocioProvider.bares = [];
+              negocioProvider.populares = [];
+              negocioProvider.reservaciones = [];
               negocioProvider.favoritos = [];
               Get.offAllNamed('login');
             },

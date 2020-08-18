@@ -4,8 +4,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:iparty/src/controllers/historia_controller.dart';
-import 'package:iparty/src/utils/utils_historia.dart';
+import 'package:IParty/src/controllers/historia_controller.dart';
+import 'package:IParty/src/utils/utils_historia.dart';
 
 
 /// Utitlity to load image (gif, png, jpg, etc) media just once. Resource is

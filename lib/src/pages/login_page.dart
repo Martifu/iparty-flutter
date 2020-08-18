@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/bloc/login_bloc.dart';
-import 'package:iparty/src/bloc/provider.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/usuario_provider.dart';
+import 'package:IParty/src/bloc/login_bloc.dart';
+import 'package:IParty/src/bloc/provider.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/usuario_provider.dart';
 import 'package:provider/provider.dart';
 
 

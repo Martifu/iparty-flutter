@@ -1,3 +1,6 @@
+import 'package:IParty/src/pages/chat_list_page.dart';
+import 'package:IParty/src/pages/editar_reservacion_page.dart';
+import 'package:IParty/src/pages/info_reservacion_page.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar_item.dart';
@@ -6,28 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:iparty/src/bloc/provider.dart';
-import 'package:iparty/src/bloc/provider_registro.dart';
-import 'package:iparty/src/components/evento_viewer.dart';
-import 'package:iparty/src/components/historias_horizontal.dart';
-import 'package:iparty/src/pages/busqueda_page.dart';
-import 'package:iparty/src/pages/comentario_page.dart';
-import 'package:iparty/src/pages/crear_reservacion_page.dart';
-import 'package:iparty/src/pages/favs_page.dart';
-import 'package:iparty/src/pages/chat_page.dart';
-import 'package:iparty/src/pages/datalles_negocio.dart';
-import 'package:iparty/src/pages/editar_perfil.dart';
-import 'package:iparty/src/pages/home_page.dart';
-import 'package:iparty/src/pages/landing_page.dart';
-import 'package:iparty/src/pages/login_page.dart';
-import 'package:iparty/src/pages/mapa_negocio.dart';
-import 'package:iparty/src/pages/mapa_negocios.dart';
-import 'package:iparty/src/pages/registro_page.dart';
-import 'package:iparty/src/pages/reservaciones_page.dart';
-import 'package:iparty/src/pages/usuario_page.dart';
-import 'package:iparty/src/providers/chat_provider.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/negocio_provider.dart';
+import 'package:IParty/src/bloc/provider.dart';
+import 'package:IParty/src/bloc/provider_registro.dart';
+import 'package:IParty/src/components/evento_viewer.dart';
+import 'package:IParty/src/components/historias_horizontal.dart';
+import 'package:IParty/src/pages/busqueda_page.dart';
+import 'package:IParty/src/pages/comentario_page.dart';
+import 'package:IParty/src/pages/crear_reservacion_page.dart';
+import 'package:IParty/src/pages/favs_page.dart';
+import 'package:IParty/src/pages/chat_page.dart';
+import 'package:IParty/src/pages/datalles_negocio.dart';
+import 'package:IParty/src/pages/editar_perfil.dart';
+import 'package:IParty/src/pages/home_page.dart';
+import 'package:IParty/src/pages/landing_page.dart';
+import 'package:IParty/src/pages/login_page.dart';
+import 'package:IParty/src/pages/mapa_negocio.dart';
+import 'package:IParty/src/pages/mapa_negocios.dart';
+import 'package:IParty/src/pages/registro_page.dart';
+import 'package:IParty/src/pages/reservaciones_page.dart';
+import 'package:IParty/src/pages/subir_historia.dart';
+import 'package:IParty/src/pages/usuario_page.dart';
+import 'package:IParty/src/providers/chat_provider.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
@@ -52,6 +56,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => new ChatProvider()),
       ],
           child: GetMaterialApp(
+            title: 'IParty',
           debugShowCheckedModeBanner: false,
           defaultTransition: Transition.fadeIn,
            initialRoute:'login',
@@ -71,6 +76,10 @@ class MyApp extends StatelessWidget {
              GetPage(name: 'busqueda', page: () => BusquedaPage()),
              GetPage(name: 'crear_reservacion', page: () => CrearReservacion()),
              GetPage(name: 'comentario', page: () => ComentarioPage()),
+             GetPage(name: 'subir_historia', page: () => SubirHistoria()),
+             GetPage(name: 'info_reservacion', page: () => InfoReservacionPage()),
+             GetPage(name: 'editar_reservacion', page: () => EditarReservacionPage()),
+             GetPage(name: 'chat_list', page: () => ChatListPage()),
           ],
       ),
     );

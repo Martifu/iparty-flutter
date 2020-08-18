@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iparty/src/models/mesagge_model.dart';
+import 'package:IParty/src/models/mesagge_model.dart';
 
 class Chat extends StatefulWidget {
-  final String userId;
+  final int userId;
   final List<Message> messages;
   final Function(String) onSend;
 
@@ -29,6 +29,7 @@ class ChatState extends State<Chat> {
     _scrollController.dispose();
     super.dispose();
   }
+  
 
   _onSend() {
     final text = _controller.value.text;
@@ -61,12 +62,11 @@ class ChatState extends State<Chat> {
         unread++;
       });
     }
-
   }
 
   Widget _item(Message message) {
     final isMe = widget.userId == message.from;
-
+  
     return Container(
       child: Wrap(
         alignment: isMe ? WrapAlignment.end : WrapAlignment.start,

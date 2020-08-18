@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:iparty/src/components/mapa_viewer.dart';
-import 'package:iparty/src/models/negocio_model.dart';
+import 'package:IParty/src/components/mapa_viewer.dart';
+import 'package:IParty/src/models/negocio_model.dart';
 
 class MapaNegociosPage extends StatelessWidget {
   @override
@@ -30,13 +30,7 @@ class MapaNegociosPage extends StatelessWidget {
               width: Get.width * 1,
               child: Row(
                 children: <Widget>[
-                  (negocios[index].fotos.length > 0) ?Container(
-                  width: 140,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(negocios[index].fotos[0].foto), fit: BoxFit.cover),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ) : Container(
+                  Container(
                   width: 140,
                   decoration: BoxDecoration(
                     image: DecorationImage(image: NetworkImage(negocios[index].foto), fit: BoxFit.cover),

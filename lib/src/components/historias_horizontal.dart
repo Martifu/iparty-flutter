@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iparty/src/controllers/historia_controller.dart';
-import 'package:iparty/src/models/negocio_model.dart';
-import 'package:iparty/src/utils/utils_historia.dart';
+import 'package:IParty/src/controllers/historia_controller.dart';
+import 'package:IParty/src/models/negocio_model.dart';
+import 'package:IParty/src/utils/utils_historia.dart';
 
 import 'hiostoria_viewer.dart';
 

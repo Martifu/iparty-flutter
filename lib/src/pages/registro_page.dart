@@ -7,13 +7,14 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iparty/src/bloc/provider_registro.dart';
-import 'package:iparty/src/bloc/registro_bloc.dart';
-import 'package:iparty/src/components/image_picker_handler.dart';
-import 'package:iparty/src/models/usuario_model.dart';
-import 'package:iparty/src/providers/info_user_provider.dart';
-import 'package:iparty/src/providers/publitio_provider.dart';
-import 'package:iparty/src/providers/usuario_provider.dart';
+import 'package:IParty/src/bloc/provider_registro.dart';
+import 'package:IParty/src/bloc/registro_bloc.dart';
+import 'package:IParty/src/components/image_picker_handler.dart';
+import 'package:IParty/src/models/negocio_model.dart';
+import 'package:IParty/src/models/usuario_model.dart';
+import 'package:IParty/src/providers/info_user_provider.dart';
+import 'package:IParty/src/providers/publitio_provider.dart';
+import 'package:IParty/src/providers/usuario_provider.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:provider/provider.dart';
 
@@ -257,13 +258,13 @@ class _RegistroPageState extends State<RegistroPage>   with TickerProviderStateM
               borderWidth: 1, borderColor: Colors.orange);
             }
           } else {
-            final imagen = await PublitioProvider.uploadVideo(image);
+            Historia imagen = await PublitioProvider.uploadProfile(image);
             UsuarioModel usuario = new UsuarioModel();
             usuario.nombre = bloc.nombre;
             usuario.email = bloc.email;
             usuario.password = bloc.password;
             usuario.fechaNacimiento = selectedDate;
-            usuario.foto = imagen;
+            usuario.foto = imagen.urlFile;
             final status = await usuarioProvider.signup(usuario);
             if (status==200) {
               Get.offAllNamed('home');

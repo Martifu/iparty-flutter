@@ -394,11 +394,11 @@ class Historia {
     int id;
     int idUsuario;
     int idNegocio;
+    String descripcion;
     int duracion;
     String urlFile;
     String tipo;
     String urlMiniatura;
-    String descripcion;
     dynamic createdAt;
     dynamic updatedAt;
     Usuario usuario;

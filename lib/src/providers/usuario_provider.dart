@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:iparty/src/models/usuario_info_model.dart';
-import 'package:iparty/src/models/usuario_model.dart';
-import 'package:iparty/src/utils/environment.dart';
+import 'package:IParty/src/models/usuario_info_model.dart';
+import 'package:IParty/src/models/usuario_model.dart';
+import 'package:IParty/src/utils/environment.dart';
 
 class UsuarioProvider {
   final box = GetStorage();
@@ -18,7 +18,7 @@ class UsuarioProvider {
 
   signup( UsuarioModel usuario) async {
 
-      final url = Uri.https(_url, "/api/signup");
+      final url = Uri.http(_url, "/api/signup");
 
     
     final authData = {
@@ -49,8 +49,8 @@ class UsuarioProvider {
   }
 
   login( String email, String password) async {
-
-      final url = Uri.https(_url, "/api/login");
+      print('logeando');
+      final url = Uri.http(_url, "/api/login");
 
       
       final authData = {
@@ -65,11 +65,11 @@ class UsuarioProvider {
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
 
-
+      print(decodedResp);
     
       if (decodedResp['message'] == 'No existe este usuario') {
         return 404;
-      } else if (decodedResp['status'] == 202) {
+      } else if (decodedResp['status'] == 202 || decodedResp['status'] == 'error') {
         return 202;
       } else {
         box.write('token', decodedResp['data']['token']['token']);
@@ -80,7 +80,7 @@ class UsuarioProvider {
 
   editarInfo( String nombre, String foto) async {
 
-      final url = Uri.https(_url, "/api/update");
+      final url = Uri.http(_url, "/api/usuario/update");
 
       
       final authData = {
@@ -90,7 +90,11 @@ class UsuarioProvider {
     };
 
     final resp = await http.post(url,
-        headers: {'Content-type': 'application/json'}, 
+        headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${box.read('token')}',
+    }, 
       body: json.encode(authData)
     );
 

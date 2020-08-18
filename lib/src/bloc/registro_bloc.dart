@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:iparty/src/bloc/validators.dart';
+import 'package:IParty/src/bloc/validators.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegistroBloc with Validators {

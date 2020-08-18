@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:iparty/src/components/image_picker_handler.dart';
+import 'package:IParty/src/components/image_picker_handler.dart';
 
 // ignore: must_be_immutable
 class ImagePickerDialog extends StatelessWidget {
