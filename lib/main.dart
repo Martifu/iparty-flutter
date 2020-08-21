@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
              GetPage(name: 'perfil', page: () => UsuarioPage()),
              GetPage(name: 'editar', page: () => EditarPerfilPage()),
              GetPage(name: 'home', page: () => MyHomePage()),
-             GetPage(name: 'landing', page: () => Landing()),
+             //GetPage(name: 'landing', page: () => Landing()),
              GetPage(name: 'detalles', page: () => DetallesPage()),
              GetPage(name: 'ver_historia', page: () => MoreStories()),
              GetPage(name: 'mapa_negocio', page: () => MapaNegocioPage()),

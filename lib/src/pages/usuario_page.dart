@@ -1,4 +1,5 @@
 
+import 'package:IParty/src/providers/chat_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +17,7 @@ class UsuarioPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final info = Provider.of<UsuarioInfoProvider>(context);
     final negocioProvider = Provider.of<NegocioProvider>(context);
+    final chat = Provider.of<ChatProvider>(context);
 
     
   
@@ -28,12 +30,9 @@ class UsuarioPage extends StatelessWidget {
             onTap: (){
               
               box.erase();
+              chat.clearMessages();
+              chat.conversaciones = [];
               negocioProvider.busquedas = [];
-              negocioProvider.antros = [];
-              negocioProvider.todos= [];
-              negocioProvider.bares = [];
-              negocioProvider.populares = [];
-              negocioProvider.reservaciones = [];
               negocioProvider.favoritos = [];
               Get.offAllNamed('login');
             },

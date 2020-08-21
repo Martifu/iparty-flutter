@@ -1,8 +1,10 @@
 
+import 'package:IParty/src/providers/chat_provider.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:IParty/src/components/nogocioCard_horizontal.dart';
 import 'package:IParty/src/providers/info_user_provider.dart';
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   final primary = Colors.black;
   final secondary = Color(0xffff5722);
- 
+  GetStorage box = GetStorage();
   
 
   @override
@@ -27,6 +29,9 @@ class _HomePageState extends State<HomePage> {
     
     super.initState();
     PublitioProvider.configurePublitio();
+    Provider.of<ChatProvider>(context, listen: false).getMessagesUser(box.read('id'));
+          
+
   }
 
   

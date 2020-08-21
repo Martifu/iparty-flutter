@@ -43,7 +43,7 @@ class _ChatListPageState extends State<ChatListPage> {
           itemCount: chats.conversaciones.length,
           itemBuilder: (context, index) {
             final todos = negocioProvider.todos;
-            final negocio = todos.first; //todos.firstWhere((element) => element.id.isEqual(num.parse(chats.conversaciones[index].idnegocio)), );
+            final negocio = todos.firstWhere((element) => element.id.isEqual(num.parse(chats.conversaciones[index].idnegocio)), );
             print(chats.conversaciones[index].mensaje);
             if (chats.conversaciones[index].from == negocio.id.toString()) {
               return ListTile(

@@ -18,7 +18,6 @@ class UsuarioInfoProvider extends ChangeNotifier{
 
 
    getInfo() async {
-    print('object');
       final url = Uri.http(_url, "/api/usuario");
 
       
@@ -42,7 +41,7 @@ class UsuarioInfoProvider extends ChangeNotifier{
           this.usuarioInfo = UsuarioInfo.fromJson(decodedResp['data']);
           box.write('foto', decodedResp['data']['foto']);
           box.write('id', decodedResp['data']['id']);
-          
+          print(box.read('id'));
 
          notifyListeners();
    }

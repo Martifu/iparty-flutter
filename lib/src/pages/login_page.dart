@@ -1,3 +1,5 @@
+import 'package:IParty/src/providers/chat_provider.dart';
+import 'package:IParty/src/providers/negocio_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -208,7 +210,8 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
           Provider.of<UsuarioInfoProvider>(context, listen: false).clearInfo();
           Provider.of<UsuarioInfoProvider>(context, listen: false).getInfo();
-          
+          NegocioProvider();
+
         } else if (status==404) {
         Get.back();
         Get.snackbar('Error', 'No existe un usuario con ese email', snackPosition: SnackPosition.BOTTOM, margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

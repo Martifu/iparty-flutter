@@ -25,6 +25,7 @@ class EditarPerfilPage extends StatefulWidget {
 class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProviderStateMixin,ImagePickerListener {
   final usuarioProvider = new UsuarioProvider();
   File _image;
+  String nombre;
   AnimationController _controller;
   ImagePickerHandler imagePicker;
   bool _isLoading = false;
@@ -41,7 +42,6 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-
     imagePicker=new ImagePickerHandler(this,_controller);
     imagePicker.init();
   }
@@ -76,7 +76,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
     UsuarioInfo usuario = Get.arguments;
 
     final size = MediaQuery.of(context).size;
-    
+    nombre = usuario.nombre;
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -131,7 +131,7 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
           color: Color(0xffff5722),
           textColor: Colors.white,
           onPressed:  (){
-            if ( nombreController.text.length < 6) {
+            if ( nombre.length < 6) {
               Get.snackbar('Error', 'Tu nombre debe contener mas de 5 caracteres',
                snackPosition: SnackPosition.BOTTOM, 
                borderWidth: 1,
@@ -211,8 +211,13 @@ class _EditarPerfilPageState extends State<EditarPerfilPage>   with TickerProvid
             padding: EdgeInsets.symmetric(horizontal: 20.0),
             child: Container(
               child: TextFormField( 
-                controller: nombreController,
+                initialValue: usuarioInfo.nombre,
                 keyboardType: TextInputType.text,
+                onChanged: (value) {
+                  setState(() {
+                    nombre = value;
+                  });
+                },
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffff5722), width: 2.0),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:IParty/src/components/slider.dart';
 
 class Landing extends StatefulWidget {
@@ -108,4 +108,4 @@ class _LandingState extends State<Landing> {
       ),
     );
   }
-}
+}*/

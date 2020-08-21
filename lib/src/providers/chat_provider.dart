@@ -54,7 +54,7 @@ class ChatProvider extends ChangeNotifier {
   }
 
   getMessagesUser(int id) async {
-    final url = Uri.http('ec2-54-84-72-80.compute-1.amazonaws.com', "/socket/api/getConversationCliente");
+    final url = Uri.http('ec2-34-239-250-62.compute-1.amazonaws.com', "/socket/api/getConversationCliente");
   
       print(id);
       final authData = {
@@ -82,7 +82,7 @@ class ChatProvider extends ChangeNotifier {
   }
 
   getConversaciones(int id, int negocio) async {
-    final url = Uri.http('ec2-54-84-72-80.compute-1.amazonaws.com', "/socket/api/getchat");
+    final url = Uri.http('ec2-34-239-250-62.compute-1.amazonaws.com', "/socket/api/getchat");
       
       print('entro');
       final authData = {
